@@ -7,13 +7,13 @@ const Routing = () => {
   return (
     <Router>
       <div>
-        <Link to="/Login">Login</Link>
-        <Link to="/Register">Register</Link>
+        <a href="/Login">Login</a>
+        <a href="/Register">Register</a>
       </div>
 
       <Routes>
-        <Route path="/Register" element={<Register />}></Route>
         <Route path="/Login" element={<Login />}></Route>
+        <Route path="/Register" element={<Register />}></Route>
       </Routes>
     </Router>
   )

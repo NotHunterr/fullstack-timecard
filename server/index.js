@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const UserModel = require('./models/Users')
+const RegisterModel = require('./models/RegisterServer')
 const PORT = process.env.PORT || 3500
 const cors = require('cors')
 
@@ -21,12 +22,29 @@ app.get('/getUsers', async (req, res) => {
   }
 })
 
+app.get('/findRegisteredUsers', async (req, res) => {
+  try {
+    const result = await RegisterModel.find({})
+    res.json(result)
+  } catch (err) {
+    res.json(err)
+  }
+})
+
 app.post('/createUser', async (req, res) => {
   const user = req.body
   const newUser = new UserModel(user)
   await newUser.save()
 
   res.json(user)
+})
+
+app.post('/registerNewUser', async (req, res) => {
+  const registerUser = req.body
+  const newRegisterUser = new RegisterModel(registerUser)
+  await newRegisterUser.save()
+
+  res.json(registerUser)
 })
 
 app.listen(PORT, () => {
